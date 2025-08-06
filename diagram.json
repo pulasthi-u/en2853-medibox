@@ -1,0 +1,207 @@
+{
+    "version": 1,
+    "author": "Pulasthi Udugamasooriya",
+    "editor": "wokwi",
+    "parts": [
+      {
+        "type": "wokwi-esp32-devkit-v1",
+        "id": "esp",
+        "top": 0,
+        "left": 0,
+        "attrs": {}
+      },
+      {
+        "type": "board-ssd1306",
+        "id": "display",
+        "top": 20,
+        "left": 223,
+        "attrs": {
+          "i2cAddress": "0x3c"
+        }
+      },
+      {
+        "type": "wokwi-pushbutton",
+        "id": "button-up",
+        "top": 150,
+        "left": 140,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-resistor",
+        "id": "resistor-up",
+        "top": 175,
+        "left": 190,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-pushbutton",
+        "id": "button-ok",
+        "top": 150,
+        "left": 240,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-resistor",
+        "id": "resistor-ok",
+        "top": 175,
+        "left": 290,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-pushbutton",
+        "id": "button-down",
+        "top": 150,
+        "left": 340,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-resistor",
+        "id": "resistor-down",
+        "top": 175,
+        "left": 390,
+        "rotate": 90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-buzzer",
+        "id": "buzzer",
+        "top": 30,
+        "left": -125,
+        "rotate": -90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-dht22",
+        "id": "dht",
+        "top": 87,
+        "left": -125,
+        "rotate": -90,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-photoresistor-sensor",
+        "id": "ldr",
+        "top": -22,
+        "left": -215,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-servo",
+        "id": "shade-control",
+        "top": -180,
+        "left": -31,
+        "rotate": -90,
+        "attrs": {}
+      }
+    ],
+    "connections": [
+      [
+        "esp:3V3", "button-up:2.r", "red", ["v30", "*", "v30"]
+      ],
+      [
+        "esp:3V3", "button-ok:2.r", "red", ["v30", "*", "v30"]
+      ],
+      [
+        "esp:3V3", "button-down:2.r", "red", ["v30", "*", "v30"]
+      ],
+      [
+        "esp:D21", "display:SDA", "black", ["h60", "*", "v-50"]
+      ],
+      [
+        "esp:D22", "display:SCL", "black", ["v10", "*", "v-40"]
+      ],
+      [
+        "esp:GND.1", "display:GND", "black", ["h20", "*", "v-20"]
+      ],
+      [
+        "esp:3V3", "display:VCC", "red", ["v80", "*", "h-130", "v-30"]
+      ],
+      [
+        "button-up:1.l", "resistor-up:1", "black", ["v-20", "*", "v-20"]
+      ],
+      [
+        "button-ok:1.l", "resistor-ok:1", "black", ["v-30", "*", "v-30"]
+      ],
+      [
+        "button-down:1.l", "resistor-down:1", "black", ["v-40", "*", "v-40"]
+      ],
+      [
+        "esp:GND.1", "resistor-up:2", "black", ["h20", "*", "v60"]
+      ],
+      [
+        "esp:GND.1", "resistor-ok:2", "black", ["h20", "*", "v60"]
+      ],
+      [
+        "esp:GND.1", "resistor-down:2", "black", ["h20", "*", "v60"]
+      ],
+      [
+        "esp:RX2", "button-down:1.l", "black", ["h10", "*"]
+      ],
+      [
+        "esp:D4", "button-ok:1.l", "black", ["h10", "*"]
+      ],
+      [
+        "esp:D2", "button-up:1.l", "black", ["h10", "*"]
+      ],
+      [
+        "esp:GND.2", "buzzer:1", "black", ["h-20", "*", "h30"]
+      ],
+      [
+        "buzzer:2", "esp:D32", "black", []
+      ],
+      [
+        "dht:VCC", "esp:3V3", "red", ["v80", "*", "v80"]
+      ],
+      [
+        "dht:SDA", "esp:D13", "black", ["h10", "v-9", "*", "h-5"]
+      ],
+      [
+        "dht:GND", "esp:GND.2", "black", ["h5", "*", "h-20"]
+      ],
+      [
+        "esp:GND.2", "display:GND", "black", ["h-20", "*", "v-20"]
+      ],
+      [
+        "ldr:VCC", "esp:3V3", "red", ["h20", "*", "v80"]
+      ],
+      [
+        "ldr:GND", "esp:GND.2", "black", ["h5", "*", "h-20"]
+      ],
+      [
+        "ldr:AO", "esp:D34", "black", ["h10", "*", "h-35"]
+      ],
+      [
+        "shade-control:V+", "esp:3V3", "red", ["v20", "*", "h0"]
+      ],
+      [
+        "shade-control:GND", "esp:GND.2", "black", ["v10", "*", "h-20"]
+      ],
+      [
+        "shade-control:PWM", "esp:D23", "black", ["v10", "*", "h12"]
+      ],
+      [
+        "esp:TX0", "$serialMonitor:RX", "", []
+      ],
+      [
+        "$serialMonitor:TX", "esp:RX0", "", []
+      ],
+      [
+        "$serialMonitor:RX", "$serialMonitor:TX", "", []
+      ],
+      [
+        "esp:TX0", "$serialMonitor:RX", "", []
+      ],
+      [
+        "esp:RX0", "$serialMonitor:TX", "", []
+      ]
+    ],
+    "serialMonitor": {
+      "display": "always",
+      "newline": "crlf"
+    }
+  }
